@@ -1,0 +1,24 @@
+publisher_info:
+  name: "Intézményi Tudományos Diákköri Konferencia (ITDK)"
+  guideline_url: null
+structural_requirements:
+  word_count_min: 30
+  word_count_max: 100
+  abstract_required: true
+  keywords_required: false
+  sections_required:
+    - "Borítólap"
+    - "Tartalomjegyzék"
+    - "Bevezetés"
+    - "A dolgozat fejezetei"
+    - "Összegzés, a dolgozat eredményeinek bemutatása"
+    - "Felhasznált irodalom"
+    - "Mellékletek"
+    - "Függelékek"
+citation_style:
+  style_name: "Szakterületnek megfelelő"
+  formatting_rules: "A hivatkozások módja a szakterületnek megfelelő. Csak a hivatkozott források jeleníthetők meg a felhasznált irodalom szakaszban."
+content_evaluation_criteria:
+  - "A pályamunkák plágiumellenőrzésen esnek át, a plágium és önplágium szigorúan tilos."
+  - "A szerzői jogok megsértése kizárást von maga után."
+  - "A rezümé tartalmazza a hallgató saját magának tulajdonított eredményeit (kb. 500 karakter)."

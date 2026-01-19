@@ -51,33 +51,48 @@ content_evaluation_criteria:
   - "Módszertani alaposság"
 """
 
-    model = genai.GenerativeModel('gemma-3-27b')
+    model = genai.GenerativeModel('gemini-1.5-flash')
     
     prompt = f"""
-    Te egy szakmai lektor asszisztens vagy. A feladatod, hogy az alábbi kiadói irányelvekből 
-    kinyerd a kért formai és tartalmi elvárásokat.
-    
-    A kért YAML struktúra:
+    Te egy precíz tudományos adatelemző vagy. A feladatod, hogy az alábbi forrásdokumentumból kinyerj MINDEN egyes publikációs követelményt és irányelvet. 
+    A kimenetnek egy szigorúan érvényes YAML struktúrának kell lennie.
+
+    SZIGORÚ SZABÁLYOK:
+    1. Ne hagyj ki semmilyen formai vagy tartalmi követelményt!
+    2. Az értéket (számok, igaz/hamis) pontosan a szövegből vedd át.
+    3. A 'content_evaluation_criteria' lista legyen kimerítő: minden olyan szempontot tartalmazzon, ami alapján a bírálók a tanulmányt értékelik (pl. nyelvhelyesség, hivatkozások pontossága, ábrák minősége, tudományos nóvum stb.).
+    4. Ha a szövegben speciális utasítások vannak (pl. "a képeket külön fájlban", "a szerzők neve nem szerepelhet"), ezeket is foglald bele a YAML-be a megfelelő kategória alatt vagy egy 'special_notes' szekcióba.
+    5. A megfogalmazások tükrözzék az eredeti dokumentum szigorát és stílusát.
+
+    ELVÁRT STRUKTÚRA (Példa, de bővítsd bátran):
     publisher_info:
-      name: "Kiadó neve"
-      guideline_url: "Forrás URL ha van"
+      name: "..."
+      guideline_url: "..."
     structural_requirements:
       word_count_min: szám
       word_count_max: szám
       abstract_required: true/false
       keywords_required: true/false
-      sections_required: ["Introduction", "Methods", ...]
+      sections_required: ["...", "..."]
+      formatting_details: "Betűtípus, margó, sortávolság stb."
     citation_style:
-      style_name: "APA/IEEE/etc"
-      formatting_rules: "Rövid leírás"
+      style_name: "..."
+      formatting_rules: "..."
+      citation_frequency_note: "Speciális megjegyzés hivatkozásokról"
     content_evaluation_criteria:
-      - "Kritérium 1"
-      - "Kritérium 2"
-      
-    Forrás tartalom:
+      - "Kritérium 1: pontos leírás a dokumentumból"
+      - "Kritérium 2: pontos leírás a dokumentumból"
+      - ... (MINDEN szempontot sorolj fel!)
+    special_notes:
+      - "Speciális utasítás 1"
+      - ...
+
+    FORRÁS TARTALOM:
+    ---
     {source_content}
-    
-    Csak a YAML kódot add vissza, markdown blokk nélkül.
+    ---
+
+    Kimenet: Csak a tiszta YAML kód, markdown blokk nélkül.
     """
     
     response = model.generate_content(prompt)
